@@ -12,7 +12,7 @@ namespace ProgrammersBlog.Entities.Concrete
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String Email { get; set; }
-        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordHash { get; set; } // sha256 md5
         public String UserName { get; set; }
         public int RoleId { get; set; }
         public Role Role { get; set; }
