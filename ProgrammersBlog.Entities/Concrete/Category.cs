@@ -11,6 +11,6 @@ namespace ProgrammersBlog.Entities.Concrete
     {
         public String Name { get; set; }
         public String Description { get; set; }
-        public ICollection<Article> Articles { get; set; }
+        public ICollection<Article> Articles { get; set; }//Bir kategorinin birden fazla Article(Makalesi) olabilir
     }
 }
