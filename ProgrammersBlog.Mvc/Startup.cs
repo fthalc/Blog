@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProgrammersBlog.Services.Extensions;
 
 namespace ProgrammersBlog.Mvc
 {
@@ -20,7 +19,7 @@ namespace ProgrammersBlog.Mvc
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAutoMapper(typeof(Startup));
-            services.LoadMyServices();
+            //services.LoadMyServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
