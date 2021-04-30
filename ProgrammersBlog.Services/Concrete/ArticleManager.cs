@@ -1,4 +1,6 @@
-﻿using ProgrammersBlog.Data.Abstract;
+﻿using AutoMapper;
+using ProgrammersBlog.Data.Abstract;
+using ProgrammersBlog.Entities.Concrete;
 using ProgrammersBlog.Entities.Dtos;
 using ProgrammersBlog.Services.Abstract;
 using ProgrammersBlog.Shared.Utilities.Results.Abstract;
@@ -15,18 +17,33 @@ namespace ProgrammersBlog.Services.Concrete
     public class ArticleManager : IArticleService
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public ArticleManager(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public ArticleManager(IUnitOfWork unitOfWork,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public Task<IResult> Add(ArticleAddDto articleAddDto, string createdByName)
+        public async Task<IResult> Add(ArticleAddDto articleAddDto, string createdByName)
+        {
+            var article = _mapper.Map<Article>(articleAddDto);
+            article.CreatedByName = createdByName;
+            article.ModifiedByName = createdByName;
+            article.UserId = 1;
+            await _unitOfWork.Articles.AddAsync(article).ContinueWith(t=>_unitOfWork.SaveAsync());
+            return new Result(ResultStatus.Success, $"{articleAddDto.Title} başlıklı makale başarıyla eklenmiştir.");
+        }
+
+        public async Task<IResult> Delete(int articleId, string modifiedByName)
+        {
+            throw new NotImplementedException();
+        }
+        public async Task<IResult> HardDelete(int articleId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IResult> Delete(int articleId, string modifiedByName)
+        public async Task<IResult> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName)
         {
             throw new NotImplementedException();
         }
@@ -106,14 +123,5 @@ namespace ProgrammersBlog.Services.Concrete
             return new DataResult<ArticleListDto>(ResultStatus.Error, "Makaleler bulunamadı", null);
         }
 
-        public Task<IResult> HardDelete(int articleId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IResult> Update(ArticleUpdateDto articleUpdateDto, string modifiedByName)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

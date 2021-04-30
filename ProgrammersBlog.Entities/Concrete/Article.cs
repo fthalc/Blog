@@ -13,8 +13,8 @@ namespace ProgrammersBlog.Entities.Concrete
         public String Content { get; set; }
         public String Thumbnail { get; set; }
         public DateTime Date { get; set; }
-        public int ViewsCount { get; set; }
-        public int CommentCount { get; set; }
+        public int ViewsCount { get; set; } = 0;
+        public int CommentCount { get; set; } = 0;
         public String SeoAuthor { get; set; }
         public String SeoDescription { get; set; }
         public String SeoTags { get; set; }
