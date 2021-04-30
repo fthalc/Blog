@@ -9,9 +9,10 @@ namespace ProgrammersBlog.Services.Abstract
     public interface ICategoryService
         //Asekron yapı olduğu için Task ile yapmamız lazım.
     {
-        Task<IDataResult<Category>> Get(int CategoryId);
-        Task<IDataResult<IList<Category>>> GetAll();//predicate vermiyoruz 
-        Task<IDataResult<IList<Category>>> GetAllByNonDeleted();
+        Task<IDataResult<CategoryDto>> Get(int CategoryId);
+        Task<IDataResult<CategoryListDto>> GetAll();//predicate vermiyoruz 
+        Task<IDataResult<CategoryListDto>> GetAllByNonDeleted();
+        Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAndActive();
         Task<IResult> Add(CategoryAddDto categoryAddDto,string createdByName);//Data Transfer Object 
         Task<IResult> Update(CategoryUpdateDto categoryUpdateDto,string modifiedByName);
         Task<IResult> Delete(int categoryId,string modifiedByName);//Silinmiş gibi gösterir ama silinmez yanlışlık olduğunda geri alınsın diye.
